@@ -11,9 +11,10 @@ public class Schrauben_Erkennung implements PlugInFilter {
 
 	@Override
 	public void run(ImageProcessor ip) {
+
 		GenericDialog dialog = createChoicesDialog(choices);
 
-		runSelectedFunction(dialog);
+		runSelectedFunction(dialog,ip);
 	}
 
 	private GenericDialog createChoicesDialog(String[] choices) {
@@ -23,14 +24,16 @@ public class Schrauben_Erkennung implements PlugInFilter {
 		return dialog;
 	}
 
-	private void runSelectedFunction(GenericDialog dialog) {
+	private void runSelectedFunction(GenericDialog dialog, ImageProcessor ip) {
+		Run r = new Run(6);
+		
 		switch (dialog.getNextChoice()) {
 		case "Kantenerkennung":
-			
+			r.runEdgeDetection(ip);
 			break;
 
 		case "Schraube finden":
-			
+			r.runFindScrew(ip);
 			break;
 
 		case "Distanztransformation":
@@ -39,7 +42,10 @@ public class Schrauben_Erkennung implements PlugInFilter {
 
 		default:
 			break;
-		}
+
+		
+		
+//		
 	}
 
 	@Override
