@@ -43,6 +43,16 @@ public class DilateAndErode {
 		}
 	}
 
+	public static void open(ImageProcessor output, StructureElement structureElement) {
+		erode(output.duplicate(), output, structureElement);
+		dilate(output.duplicate(), output, structureElement);
+	}
+
+	public static void close(ImageProcessor output, StructureElement structureElement) {
+		dilate(output.duplicate(), output, structureElement);
+		erode(output.duplicate(), output, structureElement);
+	}
+
 	public static void dilate(ImageProcessor input, ImageProcessor output, StructureElement structureElement) {
 		applyOperation(input, output, structureElement, Type.DILATE);
 	}
@@ -103,6 +113,26 @@ public class DilateAndErode {
 			for (int y = 0; y < ip.getHeight(); y++) {
 				int value = ip.get(x, y) >= thresholdIncl ? WHITE : BLACK;
 				ip.set(x, y, value);
+			}
+		}
+	}
+
+	public static void xor(ImageProcessor input, ImageProcessor output) {
+		for (int x = 0; x < output.getWidth(); x++) {
+			for (int y = 0; y < output.getHeight(); y++) {
+				boolean a = input.get(x, y) > 127;
+				boolean b = output.get(x, y) > 127;
+				boolean aXORb = (a && !b) || (!a && b);
+				output.set(x, y, aXORb ? WHITE : BLACK);
+			}
+		}
+	}
+
+	public static void invert(ImageProcessor output) {
+		for (int x = 0; x < output.getWidth(); x++) {
+			for (int y = 0; y < output.getHeight(); y++) {
+				boolean a = output.get(x, y) > 127;
+				output.set(x, y, (!a) ? WHITE : BLACK);
 			}
 		}
 	}
