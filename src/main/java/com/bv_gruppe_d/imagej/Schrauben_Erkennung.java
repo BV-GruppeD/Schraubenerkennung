@@ -8,7 +8,9 @@ public class Schrauben_Erkennung implements PlugInFilter {
 	
 	@Override
 	public void run(ImageProcessor ip) {
-		
+		Run r = new Run(6);
+		r.runEdgeDetection(ip);
+//		r.runFindScrew(ip);
 	}
 
 	@Override
