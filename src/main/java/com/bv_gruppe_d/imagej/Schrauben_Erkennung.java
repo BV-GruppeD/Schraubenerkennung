@@ -7,7 +7,8 @@ import ij.process.ImageProcessor;
 
 public class Schrauben_Erkennung implements PlugInFilter {
 
-	private static final String[] choices = { "Kantenerkennung", "Schraube finden", "Distanztransformation"};
+	private static final String[] choices = { "Kantenerkennung", "Schraube finden", "Schraube finden ohne Closing", 
+												"Distanztransformation","Kantenerkennung ohne Closing"};
 
 	@Override
 	public void run(ImageProcessor ip) {
@@ -25,27 +26,36 @@ public class Schrauben_Erkennung implements PlugInFilter {
 	}
 
 	private void runSelectedFunction(GenericDialog dialog, ImageProcessor ip) {
-		Run r = new Run(6);
+		Run r;
 		
 		switch (dialog.getNextChoice()) {
 		case "Kantenerkennung":
+			r = new Run(6);
 			r.runEdgeDetection(ip);
-			break;
+			return;
 
 		case "Schraube finden":
+			r = new Run(6);
 			r.runFindScrew(ip);
-			break;
+			return;
 
 		case "Distanztransformation":
+			r = new Run(6);
 			
-			break;
+			return;
+			
+		case "Kantenerkennung ohne Closing":
+			r = new Run(1);
+			r.runEdgeDetection(ip);
+			return;
 
 		default:
-			break;
-
-		
-		
-//		
+			
+		case "Schraube finden ohne Closing":
+			r = new Run(1);
+			r.runFindScrew(ip);
+			return;
+		}		
 	}
 
 	@Override
