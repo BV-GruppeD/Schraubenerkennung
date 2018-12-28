@@ -26,16 +26,10 @@ public class DistanceTransformation {
                     if (imageProcessor.get(x, y) == WHITE && checkEdge(x,y)) {
                         imageProcessor.set(x,y,distance);
                         pixelChanged = true;
-                        /*System.out.println("x: " + x + " y: " + y + " isedge distance: " + distance);
-                        try {
-                            TimeUnit.SECONDS.sleep(2);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }*/
+
                     }
                 }
             }
-            System.out.println("Distance: " + distance);
             initializeImage();
             distance+=10;
         } while (pixelChanged);
