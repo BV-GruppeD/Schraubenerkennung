@@ -51,4 +51,8 @@ public class Run {
 		DilateAndErode.close(ip, closeHoles);
 		DilateAndErode.open(ip, justKeepTheScrew);
 	}
+
+	public void runDistanceTransformation(ImageProcessor ip) {
+		DistanceTransformation.createBinaryImage(ip);
+	}
 }

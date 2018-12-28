@@ -41,7 +41,7 @@ public class Schrauben_Erkennung implements PlugInFilter {
 
 		case "Distanztransformation":
 			r = new Run(6);
-			
+			r.runDistanceTransformation(ip);
 			return;
 			
 		case "Kantenerkennung ohne Closing":
