@@ -8,7 +8,7 @@ import ij.process.ImageProcessor;
 public class Schrauben_Erkennung implements PlugInFilter {
 
 	private static final String[] choices = { "Kantenerkennung", "Schraube finden", "Schraube finden ohne Closing", 
-												"Distanztransformation","Kantenerkennung ohne Closing"};
+												"Distanztransformation","Kantenerkennung ohne Closing", "Ganze Schraube extrahieren"};
 
 	@Override
 	public void run(ImageProcessor ip) {
@@ -48,14 +48,19 @@ public class Schrauben_Erkennung implements PlugInFilter {
 			r = new Run(1);
 			r.runEdgeDetection(ip);
 			return;
-
-		default:
 			
 		case "Schraube finden ohne Closing":
 			r = new Run(1);
 			r.runFindScrew(ip);
 			return;
+			
+		case "Ganze Schraube extrahieren":
+			r = new Run(1);
+			r.runFindHoleScrew(ip);
+			return;
 		}		
+		
+		
 	}
 
 	@Override
